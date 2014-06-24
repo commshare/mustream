@@ -1,0 +1,28 @@
+Source Files:
+  * src/playlist/:   routines handling the music library
+  * src/network/:    routines handling the network connections
+  * src/mstream/:    main routine & error management
+  * src/sharedlib/:  some general utilities (list, string routines, etc)
+
+Install:
+  Type make to install muziqstreamer, make clean to remove all but the source
+  files, make clobj to remove the object files.
+
+Notes:
+  * Concurrent serving is achieved by implementing a pre-threaded technique,
+    faster than the normal technique of one-thread per client. The server
+    creates a pool of threads by the time it starts, and then each thread
+    waits to accept a client. The number of threads in the pool can be
+    optionally specified by the administrator (option -t), otherwise a default
+    value of 15 is used.
+  * The server can be normally terminated only by a SIGINT signal (Ctrl-C).
+  * The server logs the following:
+      [<-] Peer name & GET request for incoming connections
+      [->] Response code to each incoming request
+      [--] Occurred errors
+  * Library may contain: mp3, ogg, aac, wma, m4a, m4p, flac & m3u.
+  * Tested under linux (totem, vlc, firefox).
+  * To get back a list of every song in library give 'http://.../songsearch/'.
+
+Author:
+  Yannis Mantzouratos - std06082
